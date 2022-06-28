@@ -1,0 +1,3 @@
+-2022-06-28 0.1.0
+    - use create react app to setup frontend
+    - setup fast api backend
