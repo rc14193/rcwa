@@ -13,6 +13,10 @@
   }
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +26,54 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+footer {
+  background-color: orange;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;  
+}
+
+.controlOutline {
+  color: pink;
+  height: 100%;
+}
+
+.gitLink {
+  color: black;
+  background-color: "black";
+}
+
+.displayArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  background-color: teal;
+}
+
+.controlColumn {
+  background-color: beige;
+  width: 20%;
+  height: 100%;
+}
+
+.graphDisplay {
+  background-color: brown;
+  width: 100%;
+  height: 100%;
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
+  justify-content: space-between;
+  font-size: x-large;
+  padding: 10px;
 }
 
 .App-link {
