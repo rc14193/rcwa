@@ -55,6 +55,22 @@ footer {
   flex: 2;
 }
 
+.vectorDisplay {
+  display: flex;
+  flex-direction: row;
+  background-color: green;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.vectorInput {
+  width: 40px;
+  size: 0;
+  text-align: center;
+}
+
 .controlBtns {
   margin: 2px;
   flex: 1;
