@@ -2,7 +2,9 @@
 export default function ControlColumn(){
     return(
         <div className="controlColumn">
-            control side
+            <div className="controlOutline">
+                control text
+            </div>
         </div>
     )
 }

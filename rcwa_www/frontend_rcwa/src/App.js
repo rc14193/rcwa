@@ -5,7 +5,7 @@ import ControlColumn from './components/ControlColumn';
 
 function App() {
   return (
-    <div style={{height:'100%'}}>
+    <div style={{height:"100%", display:'flex', flexDirection:"column"}}>
       <Banner />
       <div className='displayArea'>
         <GraphDisplay />

@@ -30,16 +30,16 @@ html, body, #root {
 
 footer {
   background-color: orange;
-  position: absolute;
   text-align: center;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;  
+  position: absolute;
 }
 
 .controlOutline {
-  color: pink;
-  height: 100%;
+  border-width: 5px;
+  border-style: solid;
+  margin: 10px;
 }
 
 .gitLink {
@@ -51,20 +51,22 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100%;
   background-color: teal;
+  align-items: stretch;
+  flex: 1;
 }
 
 .controlColumn {
   background-color: beige;
   width: 20%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .graphDisplay {
   background-color: brown;
   width: 100%;
-  height: 100%;
 }
 
 .banner {
