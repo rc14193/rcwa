@@ -1,4 +1,5 @@
 import './App.css';
+import * as C from "./constants"
 import Banner from './components/Banner';
 import GraphDisplay from './components/GraphDisplay';
 import ControlColumn from './components/ControlColumn';
@@ -11,7 +12,14 @@ function App() {
         <GraphDisplay />
         <ControlColumn />
       </div>
-      <footer>A web interface for Jordan Edmund's RCWA implementation</footer>
+      <footer>
+        <div>
+          A web interface for Jordan Edmund's RCWA implementation
+        </div>
+        <div>
+          v{C.VERSION_NUM}
+        </div>
+      </footer>
     </div>
   );
 }
