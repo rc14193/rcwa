@@ -4,7 +4,6 @@ import LayerControl from "./LayerControl"
 export default function ControlColumn(){
     return(
         <div className="controlColumn">
-                <LatticeVectorsControl />
                 <LayerControl />
                 <span className="ctrlBtnSpan">
                     <button className="controlBtns">Add Layer</button>

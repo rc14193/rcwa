@@ -65,6 +65,13 @@ footer {
   margin: 5px;
 }
 
+.layerCard {
+  background-color: peru;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .vectorInput {
   width: 40px;
   size: 0;
