@@ -1,7 +1,9 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import '../react-tabs.css'
 
 export default function LayerCard({layer, isOnEnds}) {
+
+    const vecArrow = '\u20D7'
 
     return(
         <div className="layerCard">
@@ -18,7 +20,7 @@ export default function LayerCard({layer, isOnEnds}) {
                 <TabList>
                     <Tab>props</Tab>
                     <Tab disabled={layer.hasCrystal? false:true}>crystal</Tab>
-                    <Tab disabled={layer.hasCrystal? false:true}>lattice vectors</Tab>
+                    <Tab disabled={layer.hasCrystal? false:true}>L{vecArrow}</Tab>
                 </TabList>
 
                 <TabPanel>
