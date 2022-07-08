@@ -1,6 +1,7 @@
 import { useState } from "react"
 import LatticeVectorsControl from "./LatticeVectorsControl";
 import LayerCard from "./LayerCard";
+import SourceControl from "./SourceControl";
 
 export default function ControlColumn(){
 
@@ -111,6 +112,7 @@ export default function ControlColumn(){
 
     return(
         <div className="controlColumn">
+            <SourceControl />
             <div style={{background:"pink", display:"flex", flexDirection:"row", alignItems:"flex-end"}}>
                     <button className="controlBtns" onClick={addLayer}>Add Layer</button>
                     <button className="controlBtns" onClick={removeLayer}>Remove Layer</button>

@@ -39,7 +39,7 @@ footer {
 }
 
 .layerControl {
-  @apply overflow-auto max-h-full h-full;
+  @apply overflow-auto h-full;
 }
 
 .vectorDisplay {
@@ -68,6 +68,7 @@ footer {
 
 .propLabels{
   display: flex;
+  margin: 5px;
   justify-content: space-between;
   max-width: 100%;
   min-width: none;
@@ -109,7 +110,7 @@ input {
 }
 
 .controlColumn {
-  @apply flex-none overflow-y-hidden h-full max-h-full;
+  @apply flex-none h-full max-h-full flex flex-col;
 }
 
 .graphDisplay {
