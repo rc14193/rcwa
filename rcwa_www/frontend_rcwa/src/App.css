@@ -39,7 +39,6 @@ footer {
   text-align: center;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;
 }
 
 .layerControl {
@@ -119,24 +118,10 @@ input {
   background-color: "black";
 }
 
-.displayArea {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: teal;
-  align-items: stretch;
-  flex: 1;
-}
+
 
 .controlColumn {
-  background-color: beige;
-  width: 20%;
-  min-height: 0;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-justify-items: flex-end;
-justify-content: flex-end;
+  @apply bg-green-500 flex-col;
 }
 
 .graphDisplay {
@@ -151,6 +136,12 @@ justify-content: flex-end;
   justify-content: space-between;
   font-size: x-large;
   padding: 10px;
+}
+
+.displayArea {
+  @apply flex flex-1 md:flex-row sm:flex-col;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
 .App-link {
