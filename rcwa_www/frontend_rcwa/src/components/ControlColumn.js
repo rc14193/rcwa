@@ -111,6 +111,10 @@ export default function ControlColumn(){
 
     return(
         <div className="controlColumn">
+            <div style={{background:"pink", display:"flex", flexDirection:"row", alignItems:"flex-end"}}>
+                    <button className="controlBtns" onClick={addLayer}>Add Layer</button>
+                    <button className="controlBtns" onClick={removeLayer}>Remove Layer</button>
+            </div>
             <div className="layerControl">
                 {layers.map((elem, idx) => <LayerCard layer={elem} 
                     key = {idx}
@@ -121,10 +125,6 @@ export default function ControlColumn(){
                     updateLayerProp={updateLayerProp}
                     isOnEnds={idx == 0 || idx == layers.length-1} 
                     idx={idx}/>)}
-            </div>
-            <div style={{background:"pink", display:"flex", flexDirection:"row", alignItems:"flex-end"}}>
-                    <button className="controlBtns" onClick={addLayer}>Add Layer</button>
-                    <button className="controlBtns" onClick={removeLayer}>Remove Layer</button>
             </div>
         </div>
     )

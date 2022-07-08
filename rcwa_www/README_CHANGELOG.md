@@ -1,3 +1,8 @@
+-2022-07-08 0.1.1
+    - add tailwindcss
+    - general layout of screen
+    - lattice vectors and layer all in control column
+    - add react tabs for easy tabs in layer card
 -2022-06-28 0.1.0
     - use create react app to setup frontend
     - setup fast api backend

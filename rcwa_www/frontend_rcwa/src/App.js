@@ -13,7 +13,6 @@ function App() {
         <ControlColumn />
       </div>
       <footer>
-
         <div>
           A web interface for Jordan Edmund's RCWA implementation
         </div>
