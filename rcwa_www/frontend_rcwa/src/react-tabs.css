@@ -33,6 +33,7 @@ The changelog will always tell you when classes change and we also consider chan
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
     display: inline-block;
+    width: 100%;
   }
   
   .react-tabs__tab-list {
