@@ -30,6 +30,22 @@ export default function ControlColumn(){
         }
     ])
 
+    const [source, setSource] = useState({
+        centerWavelength: 500,
+        pTE: 1,
+        pTM: 1,
+        theta: 0,
+        phi: 0,
+        wavelengths: "",
+        layerLocIdx: 0,
+    })
+
+    const updateSource = (prop, newValue) => {
+        console.log(`updating source's ${prop} to value ${newValue}`)
+        source[prop] = newValue
+        setSource({...source})
+    }
+
     const addLayer = () => {
         var newLayer = {
             name: `Layer ${layers.length-1}`,
@@ -112,8 +128,8 @@ export default function ControlColumn(){
 
     return(
         <div className="controlColumn">
-            <SourceControl />
-            <div style={{background:"pink", display:"flex", flexDirection:"row", alignItems:"flex-end"}}>
+            <SourceControl layers={layers} updateSource={updateSource}/>
+            <div className="flex">
                     <button className="controlBtns" onClick={addLayer}>Add Layer</button>
                     <button className="controlBtns" onClick={removeLayer}>Remove Layer</button>
             </div>

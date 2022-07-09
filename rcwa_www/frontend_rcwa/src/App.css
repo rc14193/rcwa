@@ -15,6 +15,11 @@
 
 html, body, #root {
   height: 100vh;
+  @apply bg-slate-800;
+}
+
+textarea {
+  resize: none;
 }
 
 .mainContentGroup {
@@ -33,13 +38,13 @@ html, body, #root {
 }
 
 footer {
-  background-color: orange;
+  @apply text-gray-300;
   text-align: center;
   width: 100%;
 }
 
 .layerControl {
-  @apply overflow-auto h-full;
+  @apply overflow-auto h-full m-2 sm:mb-10 md:mb-2;
 }
 
 .vectorDisplay {
@@ -53,11 +58,7 @@ footer {
 }
 
 .layerCard {
-  min-height: 0;
-  background-color: peru;
-  margin: 5px;
-  border-radius: 5px;
-  padding: 5px;
+  @apply min-h-0 bg-slate-700 text-gray-300 m-1 rounded p-1 shadow-gray-100 shadow-md;
 }
 
 .vectorInput {
@@ -74,23 +75,18 @@ footer {
   min-width: none;
 }
 
-input {
+input, select {
+  @apply bg-slate-500 rounded-sm p-1;
   min-width: 0;
+  width: 8rem;
 }
 
 .controlBtns {
-  margin: 2px;
-  flex: 1;
+  @apply flex-1 bg-slate-700 m-1 text-gray-300 rounded;
 }
 
 .ctrlBtnSpan {
-  flex: 1;
-  background-color: pink;
-  display: flex;
-  flex-direction: row;
-  justify-self: flex-end;
-  align-self: flex-end;
-  width: 100%;
+  @apply w-full flex;
 }
 
 .latticeControl {
@@ -100,13 +96,11 @@ input {
   border-style: solid;
   margin: 5px;
   border-radius: 5px;
-  padding: 5px;
   flex: 1;
 }
 
 .gitLink {
-  color: black;
-  background-color: "black";
+  @apply flex items-center text-gray-300;
 }
 
 .controlColumn {
@@ -119,9 +113,9 @@ input {
 }
 
 .banner {
+  @apply bg-slate-700 text-gray-300;
   display: flex;
   flex-direction: row;
-  background-color: grey;
   justify-content: space-between;
   font-size: x-large;
   padding: 10px;

@@ -7,9 +7,7 @@ export default function Banner() {
           <div>
             Rigorous Coupled Wave Analysis (RCWA) 
           </div>
-          <div>
-            <a className="gitLink" href="https://github.com/edmundsj/rcwa"><GithubFilled /></a>
-          </div>
+          <a className="gitLink" href="https://github.com/edmundsj/rcwa"><GithubFilled /></a>
       </header>
     )
 }

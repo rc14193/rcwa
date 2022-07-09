@@ -16,10 +16,10 @@ export default function LatticeVectorsControl({addLatticeVector, modifyVector, r
                 </span>
                 {latticeVectors.map((elem, Vidx) => <LatticeVector Vidx={Vidx} key={Vidx} magnitudes={elem} dims={is3D} modifyVector={modifyVector} idx={idx}/>)}
             </div>
-            <span className="ctrlBtnSpan">
+            <div className="ctrlBtnSpan">
                 <button className="controlBtns" onClick={() => addLatticeVector(idx)}>+</button>
                 <button className="controlBtns" onClick={() => removeLatticeVector(idx)}>-</button>
-            </span>
+            </div>
         </div>
     )
 }

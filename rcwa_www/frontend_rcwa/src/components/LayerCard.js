@@ -50,7 +50,19 @@ export default function LayerCard({layer,
                     </label>
                 </TabPanel>
                 <TabPanel>
-                    <h2>Any content 2</h2>
+                    <Tabs>
+                        <TabList>
+                            <Tab>er</Tab>
+                            <Tab>ur</Tab>
+                        </TabList>
+
+                        <TabPanel>
+                            <textarea></textarea>
+                        </TabPanel>
+                        <TabPanel>
+                            <textarea></textarea>
+                        </TabPanel>
+                    </Tabs>
                 </TabPanel>
                 <TabPanel>
                     <LatticeVectorsControl idx={idx} 
