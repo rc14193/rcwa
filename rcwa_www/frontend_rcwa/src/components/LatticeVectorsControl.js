@@ -1,4 +1,3 @@
-import { useState } from "react"
 import LatticeVector from "./LatticeVector"
 
 
@@ -9,7 +8,6 @@ export default function LatticeVectorsControl({addLatticeVector, modifyVector, r
     return(
         <div className="latticeControl">
             <div style={{height:"100%"}}> 
-                Lattice Vectors
                 <span className="ctrlBtnSpan">
                     <button className="controlBtns" onClick={() => set3Dimensions(false, idx)}>2D</button>
                     <button className="controlBtns" onClick={() => set3Dimensions(true, idx)}>3D</button>

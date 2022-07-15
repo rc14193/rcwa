@@ -1,9 +1,13 @@
 import { useState } from "react"
-import LatticeVectorsControl from "./LatticeVectorsControl";
+import {ReloadOutlined} from '@ant-design/icons'
 import LayerCard from "./LayerCard";
 import SourceControl from "./SourceControl";
+import axios from 'axios';
+import * as C from "../constants"
 
 export default function ControlColumn(){
+
+    const [processing, setProcessing] = useState(false)
 
     const [layers, setLayers] = useState([
         {
@@ -85,6 +89,8 @@ export default function ControlColumn(){
                 layers[idx].er = newValue*newValue
                 layers[idx].ur = 1
                 break;
+            default:
+                break;
         }
         setLayers([...layers])
     }    
@@ -126,8 +132,45 @@ export default function ControlColumn(){
         setLayers([...layers])
     }
 
+    const callForCalculation = () => {
+        setProcessing(true)
+        axios.post(`http://${C.BACKEND}/calculate_stack`, {layers: layers, source: source})
+            .then(res => {
+                console.log(res)
+                console.log(res.data)
+                setProcessing(false)
+            }).catch(res => {
+                console.log(res)
+                console.log(res.response.data)
+                setProcessing(false)
+            })
+    }
+
+    const CalcButton = () =>{
+        if(processing){
+            return (
+                <div className="flex justify-center items-center">
+                    Processing&nbsp;&nbsp;
+                    <div className="flex animate-spin">
+                        <ReloadOutlined />
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return(
+                <div>
+                    Calculate
+                </div>
+            )
+        }
+    }
+
     return(
         <div className="controlColumn">
+            <div className="flex">
+                    <button className="controlBtns" onClick={callForCalculation}>{CalcButton()}</button>
+            </div>
             <SourceControl layers={layers} updateSource={updateSource}/>
             <div className="flex">
                     <button className="controlBtns" onClick={addLayer}>Add Layer</button>
@@ -141,7 +184,7 @@ export default function ControlColumn(){
                     removeLatticeVector={removeLatticeVector}
                     modifyVector={modifyVector}
                     updateLayerProp={updateLayerProp}
-                    isOnEnds={idx == 0 || idx == layers.length-1} 
+                    isOnEnds={idx === 0 || idx === layers.length-1} 
                     idx={idx}/>)}
             </div>
         </div>

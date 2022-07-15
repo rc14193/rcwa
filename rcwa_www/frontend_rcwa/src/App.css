@@ -48,9 +48,9 @@ footer {
 }
 
 .vectorDisplay {
+  @apply bg-slate-600;
   display: flex;
   flex-direction: row;
-  background-color: green;
   justify-content: space-between;
   padding: 10px;
   border-radius: 5px;
@@ -62,7 +62,7 @@ footer {
 }
 
 .vectorInput {
-  width: 40px;
+  @apply w-20;
   size: 0;
   text-align: center;
 }
@@ -82,7 +82,7 @@ input, select {
 }
 
 .controlBtns {
-  @apply flex-1 bg-slate-700 m-1 text-gray-300 rounded;
+  @apply flex-1 bg-slate-600 m-1 text-gray-300 rounded;
 }
 
 .ctrlBtnSpan {
@@ -92,10 +92,7 @@ input, select {
 .latticeControl {
   display: flex;
   flex-direction: column;
-  border-width: 5px;
-  border-style: solid;
   margin: 5px;
-  border-radius: 5px;
   flex: 1;
 }
 
