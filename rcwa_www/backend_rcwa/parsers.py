@@ -22,11 +22,13 @@ def parse_optical_constants(optical_values: str) -> list:
 def parse_layer(layer: Layer) -> rw.Layer:
     rw_layer = rw.Layer()
     # filter the api Layer to only the values present in rw.Layer
-    valid_attrs = filter(lambda key, _: hasattr(rw_layer, key), layer.__dict__.items())
-    for key, value in valid_attrs.__dict__.items():
+    print(list(layer.__dict__.items()))
+    valid_attrs = filter(lambda item_tuple: hasattr(rw_layer, item_tuple[0]), list(layer.__dict__.items()))
+    valid_attrs = [attr for attr in valid_attrs if attr[0] != "material"]
+    for key, value in valid_attrs:
         setattr(rw_layer, key, value)
 
-    if layer.has_crystal:
+    if layer.hasCrystal:
         layer.er = parse_optical_constants(layer.er)
         layer.ur = parse_optical_constants(layer.ur)
         if len(layer.er) > len(layer.ur):

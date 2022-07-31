@@ -178,7 +178,7 @@ export default function ControlColumn(){
         errorStyle = "fixed top-1/2 left-1/2 bg-gray-700 p-3 text-red-500 rounded opacity-100 z-10" 
     }
     else {
-        errorStyle = "fixed top-1/2 left-1/2 bg-gray-700 p-3 text-red-500 rounded z-10 opacity-0 duration-1000"
+        errorStyle = "fixed top-1/2 left-1/2 bg-gray-700 p-3 text-red-500 rounded z-10 opacity-0 duration-1000 delay-500"
     }
 
     return(

@@ -77,15 +77,18 @@ def calculate_stack(simulation: Simulation_Setup, response: Response):
     if len(layers) <= 2:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "Layers only had relfection and transmission, no device to simulate."}
-    try:
-        layer_stack, layer_list = parse_layer_stack(layers)
-        rw_s = parse_source(source, layer_list)
-        wavelength_sweep = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
-        solver = rw.Solver(layer_stack, rw_s, N_HARMONICS)
-        results = solver.solve(wavelength = wavelength_sweep)
-        return {"res": results}
+    #try:
+    layer_stack, layer_list = parse_layer_stack(layers)
+    rw_s = parse_source(source, layer_list)
+    wavelength_sweep = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
+    solver = rw.Solver(layer_stack, rw_s, N_HARMONICS)
+    #results = solver.solve(wavelength = wavelength_sweep)
+    return {"res": 'a'}#results}
+    '''
     except Exception as e:
+        print(f"Error trying to parse request of {e} with values {source, layers}")
         log.error(f"Error trying to parse request of {e} with values {source, layers}")
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "There was an error in your calculation setup"}
     
+        '''
