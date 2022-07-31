@@ -5,7 +5,7 @@ import SourceControl from "./SourceControl";
 import axios from 'axios';
 import * as C from "../constants"
 
-export default function ControlColumn(){
+export default function ControlColumn({setTTot, setRTot, setWavelengths}){
 
     const [processing, setProcessing] = useState(false)
 
@@ -48,7 +48,6 @@ export default function ControlColumn(){
     const [errorDisplay, setErrorDisplay] = useState(false)
 
     const updateSource = (prop, newValue) => {
-        console.log(`updating source's ${prop} to value ${newValue}`)
         source[prop] = newValue
         setSource({...source})
     }
@@ -79,7 +78,6 @@ export default function ControlColumn(){
     }
 
     const updateLayerProp = (idx, prop, newValue) => {
-        console.log(`called to update layer ${idx}, prop ${prop} to value ${newValue}`)
         layers[idx][prop] = newValue
         switch(prop){
             case "er":
@@ -141,6 +139,23 @@ export default function ControlColumn(){
             .then(res => {
                 console.log(res)
                 console.log(res.data)
+                let sweep = source.wavelengths.split(',')
+                let start = parseFloat(sweep[0])
+                let stop = parseFloat(sweep[1])
+                let step = (stop-start)/res.data["RTot"].length
+                let waves = []
+                let RTot = []
+                let TTot = []
+                let count = 0
+                for(let i = start; i < (stop+step); i += step){
+                    RTot.push(res.data["RTot"][count]*100)
+                    TTot.push(res.data["TTot"][count]*100)
+                    waves.push(start+step*i)
+                    setRTot(RTot)
+                    setTTot(TTot)
+                    setWavelengths(waves)
+                    count += 1
+                }
                 setProcessing(false)
             }).catch(res => {
                 console.log(res)

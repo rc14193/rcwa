@@ -1,5 +1,5 @@
 
-import { LineChart, Line, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, Legend, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 
 export default function GraphDisplay({RTot, TTot, wavelengths}){
     var data = []
@@ -17,8 +17,9 @@ export default function GraphDisplay({RTot, TTot, wavelengths}){
                     <YAxis domain={[0, 100]} tick={{fill: 'white', stroke: 'white'}} stroke="white" 
                     label={{fill:'white', value: "Efficiency", angle:-90, position:"insideLeft"}}/>
                     <Tooltip />
-                    <Line dataKey="RTot" dot={false}/>
-                    <Line dataKey="TTot" dot={false}/>
+                    <Legend  align='right'/>
+                    <Line dataKey="RTot" dot={false} stroke="green"/>
+                    <Line dataKey="TTot" dot={false} stroke="red"/>
                 </LineChart>
             </ResponsiveContainer>
         </div>
