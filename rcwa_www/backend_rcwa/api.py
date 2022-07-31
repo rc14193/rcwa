@@ -71,24 +71,25 @@ def read_root():
 
 @app.post("/calculate_stack")
 def calculate_stack(simulation: Simulation_Setup, response: Response):
-    print(f"got a post request with simulation of {simulation}")
     source = simulation.source
     layers = simulation.layers
     if len(layers) <= 2:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "Layers only had relfection and transmission, no device to simulate."}
-    #try:
-    layer_stack, layer_list = parse_layer_stack(layers)
-    rw_s = parse_source(source, layer_list)
-    wavelength_sweep = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
-    solver = rw.Solver(layer_stack, rw_s, N_HARMONICS)
-    #results = solver.solve(wavelength = wavelength_sweep)
-    return {"res": 'a'}#results}
-    '''
+    try:
+        layer_stack, layer_list = parse_layer_stack(layers)
+        rw_s = parse_source(source, layer_list)
+        wavelength_sweep_param = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
+        wavelength_sweep = np.linspace(wavelength_sweep_param[0], wavelength_sweep_param[1], int( \
+            (wavelength_sweep_param[1]-wavelength_sweep_param[0])/wavelength_sweep_param[2]))
+        solver = rw.Solver(layer_stack, rw_s)
+        results = solver.solve(wavelength = wavelength_sweep)
+        print(results["RTot"])
+        results["RTot"] = [res if not np.isnan(res) else -1 for res in list(results["RTot"])]
+        results["TTot"] = [res if not np.isnan(res) else -1 for res in list(results["TTot"])]
+        return {"RTot": results["RTot"], "TTot": results["TTot"]}
     except Exception as e:
-        print(f"Error trying to parse request of {e} with values {source, layers}")
+        print(f"Error trying to parse request of {e}")
         log.error(f"Error trying to parse request of {e} with values {source, layers}")
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "There was an error in your calculation setup"}
-    
-        '''

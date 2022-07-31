@@ -17,7 +17,7 @@ export default function ControlColumn(){
             er: 1,
             thickness: 0.0,
             is3D: false,
-            n: 0.0,
+            n: 1,
             material: "",
             latticeVectors:[]
         },
@@ -28,7 +28,7 @@ export default function ControlColumn(){
             er: 1,
             thickness: 0.0,
             is3D: false,
-            n: 0.0,
+            n: 1,
             material: "",
             latticeVectors:[]
         }
@@ -60,7 +60,7 @@ export default function ControlColumn(){
             ur: 1,
             er: 1,
             thickness: 0.0,
-            n: 0.0,
+            n: 1,
             material: "",
             is3D: true,
             latticeVectors: []

@@ -48,6 +48,8 @@ def parse_max_dimension(layers: list[Layer]) -> int:
 
 def parse_layer_stack(layers: list[Layer]) -> rw.LayerStack:
     stack = [parse_layer(l) for l in layers]
+    print("stack base is")
+    print(stack)
     return (rw.LayerStack(*stack[1:-1], incident_layer=stack[0], transmission_layer=stack[-1]), stack)
 
 def parse_source(s: Source, layers: list[rw.Layer]) -> rw.Source:

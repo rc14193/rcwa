@@ -1,3 +1,7 @@
+- 2022-07-31 0.1.3
+    - filter nans for bad setups
+    - working with simple setup
+    - returning RTot and TTot
 - 2022-07-15 0.1.2
     - setup backend
     - add layer parser for backend
