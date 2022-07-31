@@ -44,6 +44,9 @@ export default function ControlColumn(){
         layerLocIdx: 0,
     })
 
+    const [errorMsg, setErrorMsg] = useState("")
+    const [errorDisplay, setErrorDisplay] = useState(false)
+
     const updateSource = (prop, newValue) => {
         console.log(`updating source's ${prop} to value ${newValue}`)
         source[prop] = newValue
@@ -142,6 +145,9 @@ export default function ControlColumn(){
             }).catch(res => {
                 console.log(res)
                 console.log(res.response.data)
+                setErrorMsg(res.response.data.error)
+                setErrorDisplay(true)
+                setTimeout(function(){setErrorDisplay(false)}, 1000)
                 setProcessing(false)
             })
     }
@@ -166,8 +172,18 @@ export default function ControlColumn(){
         }
     }
 
+    let errorStyle = ""
+    if (errorDisplay){
+    // apparently mixing flexbox and fixed is weird, that's why I use left-1/3. It seems to work.
+        errorStyle = "fixed top-1/2 left-1/2 bg-gray-700 p-3 text-red-500 rounded opacity-100 z-10" 
+    }
+    else {
+        errorStyle = "fixed top-1/2 left-1/2 bg-gray-700 p-3 text-red-500 rounded z-10 opacity-0 duration-1000"
+    }
+
     return(
         <div className="controlColumn">
+            <div className={errorStyle} style={{transform: 'translate(-50%, -50%)'}}>{errorMsg}</div>
             <div className="flex">
                     <button className="controlBtns" onClick={callForCalculation}>{CalcButton()}</button>
             </div>
