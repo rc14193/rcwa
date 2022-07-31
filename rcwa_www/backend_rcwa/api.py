@@ -8,9 +8,11 @@ from fastapi import FastAPI, Response, status
 from starlette.middleware.cors import CORSMiddleware
 
 from parsers import *
+from constants import *
 
 logging.basicConfig(filename='rcwa_app.log', filemode='w', level=logging.DEBUG, format='%(asctime)s %(message)s')
 log = logging.getLogger(__name__)
+log.critical(f"RCWA API, written in Fast API, version {VERSION_NUMBER}")
 
 
 # setup the various child objects
@@ -58,8 +60,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 @app.get("/test_call")
 def test_call():
     return {"Hello": "test"}
@@ -71,15 +71,14 @@ def read_root():
 @app.post("/calculate_stack")
 def calculate_stack(simulation: Simulation_Setup, response: Response):
     print(f"got a post request with simulation of {simulation}")
-    simulation_layers = []
     source = simulation.source
     layers = simulation.layers
     if len(layers) <= 2:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "Layers only had relfection and transmission, no device to simulate."}
-
     try:
-        pass
+        layer_stack, layer_list = parse_layer_stack(layers)
+        rw_s = parse_source(source, layer_list)
     except Exception as e:
         log.error(f"Error trying to parse request of {e} with values {source, layers}")
         response.status_code = status.HTTP_400_BAD_REQUEST

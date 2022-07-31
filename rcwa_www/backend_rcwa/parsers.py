@@ -1,11 +1,13 @@
 import logging
+
 import rcwa as rw
+from numpy import pi
 
 from rcwa_www.backend_rcwa.api import Layer, Source
 
 log = logging.getLogger(__name__)
 
-def parse_optical_constants(optical_values: str):
+def parse_optical_constants(optical_values: str) -> list:
     try:
         rows = optical_values.split('\n')
         rows = filter(lambda x: x != "", rows)
@@ -19,9 +21,10 @@ def parse_optical_constants(optical_values: str):
 
 def parse_layer(layer: Layer) -> rw.Layer:
     rw_layer = rw.Layer()
-    for key, value in layer.__dict__.items():
-        if hasattr(layer, key):
-            setattr(rw_layer, key, value)
+    # filter the api Layer to only the values present in rw.Layer
+    valid_attrs = filter(lambda key, _: hasattr(rw_layer, key), layer.__dict__.items())
+    for key, value in valid_attrs.__dict__.items():
+        setattr(rw_layer, key, value)
 
     if layer.has_crystal:
         layer.er = parse_optical_constants(layer.er)
@@ -35,7 +38,22 @@ def parse_layer(layer: Layer) -> rw.Layer:
         rw_layer.crystal = c
     return rw_layer
 
+def parse_max_dimension(layers: list[Layer]) -> int:
+    # I'm guessing this will throw an error in the algorithm if there is a mismatch
+    # I'd rather return that error though so pass the max lattive vector dimensions
+    pass
+
 
 def parse_layer_stack(layers: list[Layer]) -> rw.LayerStack:
     stack = [parse_layer(l) for l in layers]
-    pass
+    return (rw.LayerStack(*stack[1:-1], incident_layer=stack[0], transmission_layer=stack[-1]), stack)
+
+def parse_source(s: Source, layers: list[rw.Layer]) -> rw.Source:
+    rw_source = rw.Source()
+    # Here it was easier to do explicit due to the various conversions
+    rw_source.wavelength = s.center_wavelength
+    rw_source.phi = s.phi * (pi/180)
+    rw_source.theta = s.theta * (pi/180)
+    rw_source.pTEM = [s.pTE, s.pTM]
+    rw_source.layer = layers[s.layer_loc_idx]
+    return rw_source

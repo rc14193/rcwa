@@ -1,3 +1,8 @@
+- 2022-07-15 0.1.2
+    - setup backend
+    - add layer parser for backend
+    - remove wireframing front end
+    - add logging backend
 -2022-07-08 0.1.1
     - add tailwindcss
     - general layout of screen
