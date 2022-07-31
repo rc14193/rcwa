@@ -17,25 +17,26 @@ log.critical(f"RCWA API, written in Fast API, version {VERSION_NUMBER}")
 
 # setup the various child objects
 # pydantic will provide about 90% of the error checking
+# A note is that all fields need to be present with the same spelling as front end
 class Source(BaseModel):
-    center_wavelength: float
+    centerWavelength: float
     pTE: float
     pTM: float
     theta: float
     phi: float
     wavelengths: str
-    layer_loc_idx: int
+    layerLocIdx: int
 
 class Layer(BaseModel):
     name: str
-    has_crystal: bool
+    hasCrystal: bool
     ur: Union[float, str] # can be homogeneous or crystal csv
     er: Union[float, str]
     thickness: float
-    is_3D: bool #not needed here but I'm just making the classes symmetric
+    is3D: bool #not needed here but I'm just making the classes symmetric
     n: float
     material: str
-    lattice_vectors: list[list[float]]
+    latticeVectors: Union[list[float], str]
 
 class Simulation_Setup(BaseModel):
     layers: list[Layer]
@@ -79,9 +80,12 @@ def calculate_stack(simulation: Simulation_Setup, response: Response):
     try:
         layer_stack, layer_list = parse_layer_stack(layers)
         rw_s = parse_source(source, layer_list)
+        wavelength_sweep = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
+        solver = rw.Solver(layer_stack, rw_s, N_HARMONICS)
+        results = solver.solve(wavelength = wavelength_sweep)
+        return {"res": results}
     except Exception as e:
         log.error(f"Error trying to parse request of {e} with values {source, layers}")
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "There was an error in your calculation setup"}
     
-    return {"Hello": "Calculation"}

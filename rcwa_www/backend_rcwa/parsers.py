@@ -34,7 +34,7 @@ def parse_layer(layer: Layer) -> rw.Layer:
         elif len(layer.ur) > len(layer.er):
             layer.er = [1 for _ in layer.er]
         rw_layer.homogenous = False
-        c = rw.Crystal(*layer.lattice_vectors, layer.er, layer.ur)
+        c = rw.Crystal(*layer.latticeVectors, layer.er, layer.ur)
         rw_layer.crystal = c
     return rw_layer
 
@@ -51,9 +51,9 @@ def parse_layer_stack(layers: list[Layer]) -> rw.LayerStack:
 def parse_source(s: Source, layers: list[rw.Layer]) -> rw.Source:
     rw_source = rw.Source()
     # Here it was easier to do explicit due to the various conversions
-    rw_source.wavelength = s.center_wavelength
+    rw_source.wavelength = s.centerWavelength
     rw_source.phi = s.phi * (pi/180)
     rw_source.theta = s.theta * (pi/180)
     rw_source.pTEM = [s.pTE, s.pTM]
-    rw_source.layer = layers[s.layer_loc_idx]
+    rw_source.layer = layers[s.layerLocIdx]
     return rw_source
