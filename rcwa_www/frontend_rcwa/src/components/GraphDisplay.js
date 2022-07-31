@@ -9,11 +9,11 @@ export default function GraphDisplay({RTot, TTot, wavelengths}){
     console.log(data)
     return(
         <div className="graphDisplay">
-        <ResponsiveContainer width="100%" height="90%">
+        <ResponsiveContainer width="100%" height="95%">
             <LineChart style={{color: 'black'}} data={data}
-                margin={{ top: 5, right: 30, left: 20}}>
-                <XAxis dataKey="wavelengths" tick={{fill: 'white', stroke: 'white'}} stroke="white"
-                    label={{fill:'white', value: "Wavelength", position:"bottom"}}/>
+                margin={{ top: 20, right: 30, left: 20, bottom: 10}}>
+                <XAxis dataKey="wavelengths" tick={{fill: 'white', stroke: 'white'}} stroke="white" 
+                    label={{fill:'white', value: "Wavelength", position:"insideBottom", offset: -5}}/>
                 <YAxis domain={[0, 100]} tick={{fill: 'white', stroke: 'white'}} stroke="white" 
                 label={{fill:'white', value: "Efficiency", angle:-90, position:"insideLeft"}}/>
                 <Tooltip />
