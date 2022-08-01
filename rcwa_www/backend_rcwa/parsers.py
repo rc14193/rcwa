@@ -2,6 +2,7 @@ import logging
 
 import rcwa as rw
 from numpy import pi
+from rcwa.shorthand import complexArray
 
 from rcwa_www.backend_rcwa.api import Layer, Source
 
@@ -36,7 +37,8 @@ def parse_layer(layer: Layer) -> rw.Layer:
         elif len(layer.ur) > len(layer.er):
             layer.er = [1 for _ in layer.er]
         rw_layer.homogenous = False
-        c = rw.Crystal(*layer.latticeVectors, layer.er, layer.ur)
+        layer.latticeVectors = list(map(complexArray, layer.latticeVectors))
+        c = rw.Crystal(layer.latticeVectors, layer.er, layer.ur)
         rw_layer.crystal = c
     return rw_layer
 

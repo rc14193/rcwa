@@ -1,5 +1,6 @@
-from typing import Union
+import psutil
 import logging
+from typing import Union
 
 import rcwa as rw
 import numpy as np
@@ -36,7 +37,7 @@ class Layer(BaseModel):
     is3D: bool #not needed here but I'm just making the classes symmetric
     n: float
     material: str
-    latticeVectors: Union[list[float], str]
+    latticeVectors: list
 
 class Simulation_Setup(BaseModel):
     layers: list[Layer]
@@ -71,6 +72,14 @@ def read_root():
 
 @app.post("/calculate_stack")
 def calculate_stack(simulation: Simulation_Setup, response: Response):
+    available_mem = psutil.virtual_memory().available/(1e6)
+    print(available_mem)
+    # check available memory greater than 220MB, 
+    # little buffer from 200MB I saw in testing for the algo
+    if available_mem < 220.0: 
+        response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+        return {"error": "Server is busy. Please try again in a few minutes"}
+
     source = simulation.source
     layers = simulation.layers
     if len(layers) <= 2:

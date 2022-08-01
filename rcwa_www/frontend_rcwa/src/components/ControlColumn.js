@@ -128,7 +128,7 @@ export default function ControlColumn({setTTot, setRTot, setWavelengths}){
 
     var modifyVector = (vectorIdx, component, event, idx) => {
         var layer = layers[idx]
-        layer.latticeVectors[vectorIdx][component] = event.target.value
+        layer.latticeVectors[vectorIdx][component] = parseFloat(event.target.value)
         layers[idx] = layer
         setLayers([...layers])
     }

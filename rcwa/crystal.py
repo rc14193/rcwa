@@ -18,7 +18,7 @@ class Crystal:
         self.lattice_vectors = []
 
         if len(raw_lattice_vectors[0]) < self.dimensions:
-            raise ValueError('Lattice vector does not have enough dimensions. Needs at least {self.dimensions}')
+            raise ValueError(f'Lattice vector does not have enough dimensions. Needs at least {self.dimensions}')
 
         if self.dimensions == 1:
             self.lattice_vectors.append(raw_lattice_vectors[0, 0:2])
