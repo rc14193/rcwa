@@ -29,3 +29,4 @@ debugging_notes
 htmlcov/
 
 *.cache*
+*node_modules*
