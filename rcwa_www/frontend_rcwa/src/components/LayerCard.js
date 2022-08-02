@@ -50,19 +50,8 @@ export default function LayerCard({layer,
                     </label>
                 </TabPanel>
                 <TabPanel>
-                    <Tabs>
-                        <TabList>
-                            <Tab>er</Tab>
-                            <Tab>ur</Tab>
-                        </TabList>
-
-                        <TabPanel>
-                            <textarea></textarea>
-                        </TabPanel>
-                        <TabPanel>
-                            <textarea></textarea>
-                        </TabPanel>
-                    </Tabs>
+                    er<br />
+                    <textarea onChange={(e) => updateLayerProp(idx, "er", e.target.value)} value={layer.er}></textarea>
                 </TabPanel>
                 <TabPanel>
                     <LatticeVectorsControl idx={idx} 

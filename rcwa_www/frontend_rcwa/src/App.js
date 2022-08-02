@@ -11,7 +11,7 @@ function App() {
   const [TTot, setTTot] = useState([])
   const [wavelengths, setWavelengths] = useState([])
 
-  if(wavelengths.length == 0){
+  if(wavelengths.length === 0){
     var wave = []
     var r = []
     var t = []

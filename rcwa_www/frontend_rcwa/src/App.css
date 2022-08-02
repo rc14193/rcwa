@@ -61,6 +61,10 @@ footer {
   @apply min-h-0 bg-slate-700 text-gray-300 m-1 rounded p-1 shadow-gray-100 shadow-md;
 }
 
+textarea {
+  @apply bg-slate-500 text-gray-300
+}
+
 .vectorInput {
   @apply w-20;
   size: 0;

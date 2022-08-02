@@ -35,7 +35,7 @@ class Layer(BaseModel):
     er: Union[float, str]
     thickness: float
     is3D: bool #not needed here but I'm just making the classes symmetric
-    n: float
+    n: Union[float, None]
     material: str
     latticeVectors: list
 
@@ -85,20 +85,23 @@ def calculate_stack(simulation: Simulation_Setup, response: Response):
     if len(layers) <= 2:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "Layers only had relfection and transmission, no device to simulate."}
-    try:
-        layer_stack, layer_list = parse_layer_stack(layers)
-        rw_s = parse_source(source, layer_list)
-        wavelength_sweep_param = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
-        wavelength_sweep = np.linspace(wavelength_sweep_param[0], wavelength_sweep_param[1], int( \
-            (wavelength_sweep_param[1]-wavelength_sweep_param[0])/wavelength_sweep_param[2]))
-        solver = rw.Solver(layer_stack, rw_s)
-        results = solver.solve(wavelength = wavelength_sweep)
-        print(results["RTot"])
-        results["RTot"] = [res if not np.isnan(res) else -1 for res in list(results["RTot"])]
-        results["TTot"] = [res if not np.isnan(res) else -1 for res in list(results["TTot"])]
-        return {"RTot": results["RTot"], "TTot": results["TTot"]}
+    #try:
+    layer_stack, layer_list = parse_layer_stack(layers)
+    rw_s = parse_source(source, layer_list)
+    wavelength_sweep_param = [float(val) for val in source.wavelengths.split(',') if val != "" and val != "\n"] 
+    wavelength_sweep = np.linspace(wavelength_sweep_param[0], wavelength_sweep_param[1], int( \
+        (wavelength_sweep_param[1]-wavelength_sweep_param[0])/wavelength_sweep_param[2]))
+    solver = rw.Solver(layer_stack, rw_s)
+    results = solver.solve(wavelength = wavelength_sweep)
+    print(np.max(results["RTot"]))
+    print(np.max(results["TTot"]))
+    rtot = [res if not np.isnan(res) else -1 for res in list(results["RTot"])]
+    ttot = [res if not np.isnan(res) else -1 for res in list(results["TTot"])]
+    return {"RTot": rtot, "TTot": ttot}
+    '''
     except Exception as e:
         print(f"Error trying to parse request of {e}")
         log.error(f"Error trying to parse request of {e} with values {source, layers}")
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"error": "There was an error in your calculation setup"}
+'''

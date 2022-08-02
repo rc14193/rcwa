@@ -52,18 +52,23 @@ export default function ControlColumn({setTTot, setRTot, setWavelengths}){
         setSource({...source})
     }
 
-    const addLayer = () => {
+    const createLayer = (thickness = 0.0, n = 1.0) => {
         var newLayer = {
             name: `Layer ${layers.length-1}`,
             hasCrystal: false,
             ur: 1,
-            er: 1,
-            thickness: 0.0,
-            n: 1,
+            er: Math.sqrt(n),
+            thickness: thickness,
+            n: n,
             material: "",
             is3D: true,
             latticeVectors: []
         }
+        return newLayer
+    }
+
+    const addLayer = (thickness = 0.0, n = 1.0) => {
+        var newLayer = createLayer(thickness, n)
         var newLayers = [...layers]
         newLayers.splice(layers.length-1, 0, newLayer)
         setLayers(newLayers)
@@ -132,6 +137,26 @@ export default function ControlColumn({setTTot, setRTot, setWavelengths}){
         layers[idx] = layer
         setLayers([...layers])
     }
+
+    // a test case for now to generate the bragg mirror
+    if(layers.length == 2){
+        let loclayers = [layers[0]]
+        for(let i = 0; i < 11; i++) {
+                let n1 = 3.5
+                let n2 = 1.45
+                let t1 = 1.3/4/n1
+                let t2 = 1.3/4/n2
+                if(i%2 == 0) {
+                    loclayers.push(createLayer(t1, n1))
+                }
+                else {
+                    loclayers.push(createLayer(t2, n2))
+                }
+            }
+        loclayers.push(layers[1])
+        setLayers(loclayers)
+    }
+    
 
     const callForCalculation = () => {
         setProcessing(true)
