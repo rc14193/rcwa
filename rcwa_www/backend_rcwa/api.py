@@ -98,6 +98,7 @@ def calculate_stack(simulation: Simulation_Setup, response: Response):
     rtot = [res if not np.isnan(res) else -1 for res in list(results["RTot"])]
     ttot = [res if not np.isnan(res) else -1 for res in list(results["TTot"])]
     return {"RTot": rtot, "TTot": ttot}
+    # the except is commented out to make it easier to locate the line the error occurs on
     '''
     except Exception as e:
         print(f"Error trying to parse request of {e}")
