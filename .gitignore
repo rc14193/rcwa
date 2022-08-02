@@ -27,3 +27,5 @@ rcwa.egg-info/
 debugging_notes
 
 htmlcov/
+
+*.cache*
