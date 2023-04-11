@@ -1,0 +1,25 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
+
+# setup img general dir
+WORKDIR /app
+
+# copy relevant api files from repot
+COPY ./environment.yml /app
+COPY ./setup.py /app
+COPY ./README.md /app
+COPY ./rcwa /app/rcwa
+
+ENV GITHUB_RUN_NUMBER=1
+
+# setup image rcwa
+RUN pip3 install .
+RUN pip3 install psutil
+
+ENV PYTHONPATH=../..
+copy ./rcwa_www/backend_rcwa /app/rcwa_www/backend_rcwa
+WORKDIR /app/rcwa_www/backend_rcwa
+
+# run api
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "80"]
+
+
