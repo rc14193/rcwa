@@ -46,13 +46,8 @@ class Simulation_Setup(BaseModel):
 app = FastAPI()
 
 origins = [ # specifies the website url of the front end, and what is allowed
-    "http://localhost:3000",
-    "127.0.0.1:8000",
-    "localhost:3000",
-    "192.168.1.215:3000",
-    "http://192.168.1.215:3000",
-    "https://localhost",
-    "https://localhost:3000",
+    "https://127.0.0.1:80",
+    "https://127.0.0.1:8000",
 ]
 
 app.add_middleware(

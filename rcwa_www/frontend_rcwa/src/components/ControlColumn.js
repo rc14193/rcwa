@@ -175,12 +175,12 @@ export default function ControlColumn({setTTot, setRTot, setWavelengths}){
                 for(let i = start; i < (stop+step); i += step){
                     RTot.push(res.data["RTot"][count]*100)
                     TTot.push(res.data["TTot"][count]*100)
-                    waves.push(start+step*i)
-                    setRTot(RTot)
-                    setTTot(TTot)
-                    setWavelengths(waves)
+                    waves.push(start+step*count)
                     count += 1
                 }
+                setRTot(RTot)
+                setTTot(TTot)
+                setWavelengths(waves)
                 setProcessing(false)
             }).catch(res => {
                 console.log(res)
