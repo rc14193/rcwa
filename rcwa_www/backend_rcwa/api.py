@@ -47,6 +47,7 @@ app = FastAPI()
 
 origins = [ # specifies the website url of the front end, and what is allowed
     "http://localhost:3000",
+    "127.0.0.1:8000",
     "localhost:3000",
     "192.168.1.215:3000",
     "http://192.168.1.215:3000",
@@ -56,7 +57,7 @@ origins = [ # specifies the website url of the front end, and what is allowed
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -98,11 +99,3 @@ def calculate_stack(simulation: Simulation_Setup, response: Response):
     rtot = [res if not np.isnan(res) else -1 for res in list(results["RTot"])]
     ttot = [res if not np.isnan(res) else -1 for res in list(results["TTot"])]
     return {"RTot": rtot, "TTot": ttot}
-    # the except is commented out to make it easier to locate the line the error occurs on
-    '''
-    except Exception as e:
-        print(f"Error trying to parse request of {e}")
-        log.error(f"Error trying to parse request of {e} with values {source, layers}")
-        response.status_code = status.HTTP_400_BAD_REQUEST
-        return {"error": "There was an error in your calculation setup"}
-'''
